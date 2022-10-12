@@ -9,12 +9,15 @@ const app = express();
 // app.use(cors());
 app.use("/books", router); // localhost:5000/books
 
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://admin:ssen5271@cluster0.ydiwuj7.mongodb.net/?retryWrites=true&w=majority";
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://admin:ssen5271@cluster0.ydiwuj7.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
+moongoose
+  .connect(uri, { useNewUrlparser: true, useUnifiedTopology: true })
+  .then((data) => {
+    console.log("mongoDB connected with server: ${data.connection.host}");
+  });
+app.listen(5000, () => {
+  console.log("server is working on http://localhost:5000");
 });
